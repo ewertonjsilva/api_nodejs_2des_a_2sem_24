@@ -1,0 +1,15 @@
+excluir o banco de dados e criar novamente com o mesmo nome
+
+CREATE DATABASE nomeBanco CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;
+
+CREATE DATABASE nomeBanco CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE ewerton_node CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+
+-- excluir todas as tabelas e depois executar o comand abaixo
+ALTER DATABASE nomeBanco CHARACTER SET utf8 COLLATE utf8_general_ci; 
+
+servidor: 10.67.22.216
+usuário: us_aula_node
+senha: 123456
+banco: s223_node
