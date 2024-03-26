@@ -8,7 +8,7 @@ INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativ
 INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (2, 'Mateus Vitor Lima', 'mateusvitorlima@abcturismo.com.br', '123456', 1, true, '1998-11-06');
 INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (3, 'Rosângela Marina Nicole Aragão', 'rosangela_marina_aragao@vivo.com.br', '123456',  1, true, '1993-05-10');
 INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (4, 'Severino Márcio João Ribeiro', 'severino-ribeiro95@advocaciand.adv.br', '123456', 2, true, '2000-02-18');
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (5, 'Mariah Sebastiana Assunção', 'mariah_assuncao@queirozgalvao.com', '123456', 2, true, '1982-12-30');
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (5, 'Mariah Sebastiana Assunção', 'mariah_assuncao@queirozgalvao.com', '123456', 2, false, '1982-12-30');
 INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (6, 'Rosângela Marina Nicole Aragão', 'rosangela_marina_aragao@vivo.com.br', '123456', 2, true, '1970-10-22');
 
 -- TIPOS DE PRODUTO
