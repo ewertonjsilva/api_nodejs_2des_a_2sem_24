@@ -1,4 +1,3 @@
-const { json } = require('express'); 
 const db = require('../database/connection'); 
 
 module.exports = {
