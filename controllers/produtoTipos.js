@@ -10,9 +10,9 @@ module.exports = {
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: `Erro na requisição. -${error}`, 
-                dados: null
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
             });
         }
     }, 
@@ -25,9 +25,9 @@ module.exports = {
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: `Erro na requisição. -${error}`, 
-                dados: null
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
             });
         }
     }, 
@@ -40,9 +40,9 @@ module.exports = {
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: `Erro na requisição. -${error}`, 
-                dados: null
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
             });
         }
     }, 
@@ -55,9 +55,9 @@ module.exports = {
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: `Erro na requisição. -${error}`, 
-                dados: null
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
             });
         }
     }, 

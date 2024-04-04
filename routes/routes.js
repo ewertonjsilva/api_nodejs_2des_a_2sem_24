@@ -19,7 +19,8 @@ router.get('/usuarios', UsuariosController.listarUsuarios);
 router.post('/usuarios', UsuariosController.cadastrarUsuarios); //body
 router.patch('/usuarios/:usu_id', UsuariosController.editarUsuarios); // params (URL) e body
 router.delete('/usuarios/:usu_id', UsuariosController.apagarUsuarios); // params (URL)
-router.delete('/usuarios/del/:usu_id', UsuariosController.ocultarUsuario); // params (URL)
+router.delete('/usuarios/del/:usu_id', UsuariosController.ocultarUsuario); // params (URL) 
+router.post('/usuarios/login', UsuariosController.login); //body
 
 router.get('/produtos', ProdutosController.listarProdutos); 
 router.post('/produtos', ProdutosController.cadastrarProdutos); 
@@ -36,6 +37,7 @@ router.post('/clientes', ClientesController.cadastrarClientes);
 router.patch('/clientes', ClientesController.editarClientes); 
  
 router.get('/cidades', CidadesController.listarCidades); 
+router.get('/ufs', CidadesController.listarUfs); 
 
 router.get('/enderecoclientes', EnderecoClientesController.listarEnderecoClientes); 
 router.post('/enderecoclientes', EnderecoClientesController.cadastrarEnderecoClientes); 

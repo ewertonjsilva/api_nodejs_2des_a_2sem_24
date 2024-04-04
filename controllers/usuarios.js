@@ -143,13 +143,20 @@ module.exports = {
             const values = [usu_email, usu_senha];
 
             const usuarios = await db.query(sql, values);
-            const nItens = usuarios[0].length;
-            // fazendo login
+            const nItens = usuarios[0].length; 
+
+            if (nItens < 1) {
+                return response.status(403).json({
+                    sucesso: false,
+                    mensagem: 'Login e/ou senha inválido.',
+                    dados: null,
+                });
+            }
+
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Lista de usuários.',
-                dados: usuarios[0],
-                nItens
+                mensagem: 'Login efetuado com sucesso',
+                dados: usuarios[0]
             });
         } catch (error) {
             return response.status(500).json({

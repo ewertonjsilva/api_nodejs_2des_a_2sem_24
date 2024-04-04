@@ -2,17 +2,40 @@ const db = require('../database/connection');
 
 module.exports = {
     async listarCidades(request, response) {
-        try {            
+        try {
+            const { cid_uf, cid_nome } = request.body;
+            const sql = `SELECT 
+                cid_id, cid_nome, cid_uf 
+                FROM cidades 
+                WHERE cid_uf like '?' AND cid_nome like '%${cid_nome}%';`;
+            const cidades = await db.query(sql);
+            const nItens = cidades[0].length;            
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de cidades.', 
+                dados: cidades[0], 
+                nItens
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
+            });
+        }
+    }, 
+    async listarUfs(request, response) {
+        try {            
+            return response.status(200).json({
+                sucesso: true, 
+                mensagem: 'Lista de estados.', 
                 dados: null
             });
         } catch (error) {
             return response.status(500).json({
-                sucesso: false, 
-                mensagem: `Erro na requisição. -${error}`, 
-                dados: null
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
             });
         }
     }, 
