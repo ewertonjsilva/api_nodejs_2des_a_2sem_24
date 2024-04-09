@@ -3,10 +3,20 @@ const db = require('../database/connection');
 module.exports = {
     async listarEnderecoClientes(request, response) {
         try {
+
+            const sql = `SELECT 
+                end_id, usu_id, end_logradouro, end_num, end_bairro, 
+                end_complemento, cid_id, end_principal = 1 AS end_principal  
+                FROM endereco_clientes; `;
+            
+            const enderecos = await db.query(sql); 
+            const nItens = enderecos[0].length;
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Lista de endereço de cliente.', 
-                dados: null
+                mensagem: 'Lista de endereço do cliente.', 
+                dados: enderecos[0], 
+                nItens
             });
         } catch (error) {
             return response.status(500).json({
@@ -18,10 +28,23 @@ module.exports = {
     }, 
     async cadastrarEnderecoClientes(request, response) {
         try {
+
+            const { usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal } = request.body;
+
+            const sql = `INSERT INTO endereco_clientes 
+                (usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal) 
+                VALUES (?, ?, ?, ?, ?, ?, ?); `;
+
+            const values = [usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal];
+
+            const execSql = await db.query(sql, values);
+
+            const end_id = execSql[0].insertId;
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Cadastro de endereço de cliente.', 
-                dados: null
+                mensagem: 'Cadastro de endereço do cliente realizado com sucesso.', 
+                dados: end_id
             });
         } catch (error) {
             return response.status(500).json({

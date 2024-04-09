@@ -42,11 +42,11 @@ INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bair
 -- ped_tipo: 0 - mesa, 1 - retirada, 2 - entrega
 -- ped_status: 0 - cancelado, 1 - recebido, 2 - confirmado, 3 - preparando, 4 - pronto, 5 - saiu para entrega, 6 - devolvido, 7 - entregue, 8 - fechado
 -- ped_tp_pag: 0 - Em aberto, 1 - Crédito, 2 - Débito, 3 - Pix, 4 - Dinheiro, 5 - Cheque
-INSERT INTO pedidos (ped_id, ped_data, usu_id, cli_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (1, '2022-08-16', 2, 4, 0, 8, 0.00, 39.00, 2, 1); 
-INSERT INTO pedidos (ped_id, ped_data, usu_id, cli_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (2, '2022-08-16', 2, 5, 0, 8, 0.00, 105.00, 4, 1); 
-INSERT INTO pedidos (ped_id, ped_data, usu_id, cli_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (3, '2022-08-16', 2, 6, 2, 8, 1.00, 27.00, 4, 1); 
-INSERT INTO pedidos (ped_id, ped_data, usu_id, cli_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (4, '2022-08-17', 3, 5, 1, 4, 5.90, 48.10, 3, 0); 
-INSERT INTO pedidos (ped_id, ped_data, usu_id, cli_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (5, '2022-08-17', 3, 6, 0, 3, 0.00, 0.00, 0, 0); 
+INSERT INTO pedidos (ped_id, ped_data, usu_id, end_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (1, '2022-08-16', 2, 1, 0, 8, 0.00, 39.00, 2, 1); 
+INSERT INTO pedidos (ped_id, ped_data, usu_id, end_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (2, '2022-08-16', 2, 2, 0, 8, 0.00, 105.00, 4, 1); 
+INSERT INTO pedidos (ped_id, ped_data, usu_id, end_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (3, '2022-08-16', 2, 3, 2, 8, 1.00, 27.00, 4, 1); 
+INSERT INTO pedidos (ped_id, ped_data, usu_id, end_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (4, '2022-08-17', 3, 2, 1, 4, 5.90, 48.10, 3, 0); 
+INSERT INTO pedidos (ped_id, ped_data, usu_id, end_id, ped_tipo, ped_status, ped_desconto, ped_vlr_pago, ped_tp_pag, ped_pago) VALUES (5, '2022-08-17', 3, 4, 0, 3, 0.00, 0.00, 0, 0); 
 
 -- MESAS
 -- status: 0 - livre, 1 - reservada, 2 - ocupada, 3 - inativa

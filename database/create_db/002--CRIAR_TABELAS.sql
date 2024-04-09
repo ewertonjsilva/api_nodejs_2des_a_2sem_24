@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS PEDIDOS (
 	ped_id int NOT NULL AUTO_INCREMENT,
 	ped_data DATETIME NOT NULL,
 	usu_id int NOT NULL,
-	cli_id int NULL,
+	end_id int NULL,
 	ped_tipo tinyint NOT NULL,
 	ped_status tinyint NOT NULL,
 	ped_desconto DECIMAL(6,2) NOT NULL,

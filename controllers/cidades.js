@@ -3,12 +3,15 @@ const db = require('../database/connection');
 module.exports = {
     async listarCidades(request, response) {
         try {
-            const { cid_uf, cid_nome } = request.body;
+            const { cid_uf, cid_nome } = request.body; 
+            const cidPesq = `%${cid_nome}%`;
             const sql = `SELECT 
                 cid_id, cid_nome, cid_uf 
                 FROM cidades 
-                WHERE cid_uf like '?' AND cid_nome like '%${cid_nome}%';`;
-            const cidades = await db.query(sql);
+                WHERE cid_uf = ? AND cid_nome like ?;`;
+
+            const values = [cid_uf, cidPesq];
+            const cidades = await db.query(sql, values);
             const nItens = cidades[0].length;            
             return response.status(200).json({
                 sucesso: true, 
