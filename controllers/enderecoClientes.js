@@ -7,7 +7,7 @@ module.exports = {
             const sql = `SELECT 
                 end_id, usu_id, end_logradouro, end_num, end_bairro, 
                 end_complemento, cid_id, end_principal = 1 AS end_principal  
-                FROM endereco_clientes; `;
+                FROM endereco_clientes;`;
             
             const enderecos = await db.query(sql); 
             const nItens = enderecos[0].length;
@@ -33,7 +33,7 @@ module.exports = {
 
             const sql = `INSERT INTO endereco_clientes 
                 (usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal) 
-                VALUES (?, ?, ?, ?, ?, ?, ?); `;
+                VALUES (?, ?, ?, ?, ?, ?, ?);`;
 
             const values = [usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal];
 
@@ -43,7 +43,7 @@ module.exports = {
 
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Cadastro de endereço do cliente realizado com sucesso.', 
+                mensagem: `Cadastro de endereço do cliente ${usu_id} realizado com sucesso.`, 
                 dados: end_id
             });
         } catch (error) {
@@ -56,10 +56,23 @@ module.exports = {
     }, 
     async editarEnderecoClientes(request, response) {
         try {
+
+            const { end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal } = request.body;
+            const { end_id } = request.params;
+
+            const sql = `UPDATE endereco_clientes SET end_logradouro = ?, end_num = ?, 
+                end_bairro = ?, end_complemento = ?, cid_id = ?, 
+                end_principal = ? WHERE end_id = ?;`;
+
+            const values = [end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal, end_id];
+
+            const atualizaDados = await db.query(sql, values);
+
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Editar endereço de cliente.', 
-                dados: null
+                mensagem: 'Endereço atualizado com sucesso!', 
+                dados: atualizaDados[0].affectedRows
             });
         } catch (error) {
             return response.status(500).json({

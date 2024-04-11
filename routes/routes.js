@@ -34,14 +34,14 @@ router.delete('/ingredientes', IngredientesController.apagarIngredientes);
 
 router.get('/clientes', ClientesController.listarClientes); 
 router.post('/clientes', ClientesController.cadastrarClientes); 
-router.patch('/clientes', ClientesController.editarClientes); 
+router.patch('/clientes/:usu_id', ClientesController.editarClientes); 
  
 router.get('/cidades', CidadesController.listarCidades); 
 router.get('/ufs', CidadesController.listarUfs); 
 
 router.get('/enderecoclientes', EnderecoClientesController.listarEnderecoClientes); 
 router.post('/enderecoclientes', EnderecoClientesController.cadastrarEnderecoClientes); 
-router.patch('/enderecoclientes', EnderecoClientesController.editarEnderecoClientes); 
+router.patch('/enderecoclientes/:end_id', EnderecoClientesController.editarEnderecoClientes); 
 router.delete('/enderecoclientes', EnderecoClientesController.apagarEnderecoClientes); 
 
 router.get('/mesas', MesasController.listarMesas); 
