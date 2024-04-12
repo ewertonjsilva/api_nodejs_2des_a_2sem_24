@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS ENDERECO_CLIENTES (
 	end_complemento varchar(60),
 	cid_id int NOT NULL, 
 	end_principal bit NOT NULL, 
+	end_excluido bit NOT NULL, 
 	PRIMARY KEY (end_id)
 );
 

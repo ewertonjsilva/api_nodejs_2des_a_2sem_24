@@ -33,10 +33,10 @@ INSERT INTO clientes (usu_id, cli_cel, cli_pts) VALUES (5, '14922334444', 50);
 INSERT INTO clientes (usu_id, cli_cel, cli_pts) VALUES (6, '14911113111', 0);
 
 -- ENDERECO CLIENTES
-INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal) VALUES (1, 4, 'Rua dos Salgueiros', '645', 'Mangabeira', 'Fundos', 3884, true); 
-INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal) VALUES (2, 5, 'Rua Melo Leitão', '1831', 'Prata', NULL, 3884, true); 
-INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal) VALUES (3, 6, 'Rua Mundico Thomas', '39', 'Treze de Setembro', NULL, 3672, true); 
-INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal) VALUES (4, 6, 'Rua Brasil', '390', 'Centro', NULL, 3672, false); 
+INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal, end_excluido) VALUES (1, 4, 'Rua dos Salgueiros', '645', 'Mangabeira', 'Fundos', 3884, true, false); 
+INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal, end_excluido) VALUES (2, 5, 'Rua Melo Leitão', '1831', 'Prata', NULL, 3884, true, false); 
+INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal, end_excluido) VALUES (3, 6, 'Rua Mundico Thomas', '39', 'Treze de Setembro', NULL, 3672, true, false); 
+INSERT INTO endereco_clientes (end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal, end_excluido) VALUES (4, 6, 'Rua Brasil', '390', 'Centro', NULL, 3672, false, false); 
 
 -- PEDIDOS
 -- ped_tipo: 0 - mesa, 1 - retirada, 2 - entrega
@@ -101,3 +101,4 @@ INSERT INTO produto_ingredientes (prd_id, ing_id, prd_ing_adicional) VALUES (1, 
 INSERT INTO produto_ingredientes (prd_id, ing_id, prd_ing_adicional) VALUES (2, 5, true); 
 INSERT INTO produto_ingredientes (prd_id, ing_id, prd_ing_adicional) VALUES (1, 6, true); 
 INSERT INTO produto_ingredientes (prd_id, ing_id, prd_ing_adicional) VALUES (2, 6, true); 
+

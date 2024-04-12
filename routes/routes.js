@@ -42,7 +42,7 @@ router.get('/ufs', CidadesController.listarUfs);
 router.get('/enderecoclientes', EnderecoClientesController.listarEnderecoClientes); 
 router.post('/enderecoclientes', EnderecoClientesController.cadastrarEnderecoClientes); 
 router.patch('/enderecoclientes/:end_id', EnderecoClientesController.editarEnderecoClientes); 
-router.delete('/enderecoclientes', EnderecoClientesController.apagarEnderecoClientes); 
+router.delete('/enderecoclientes/:end_id', EnderecoClientesController.apagarEnderecoClientes); 
 
 router.get('/mesas', MesasController.listarMesas); 
 router.post('/mesas', MesasController.cadastrarMesas); 
