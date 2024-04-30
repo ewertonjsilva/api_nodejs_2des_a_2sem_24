@@ -28,11 +28,14 @@ module.exports = {
         }
     }, 
     async listarUfs(request, response) {
-        try {            
+        try {   
+            const sql = `SELECT DISTINCT cid_uf FROM cidades ORDER BY cid_uf ASC;`;
+            const estados = await db.query(sql);            
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de estados.', 
-                dados: null
+                dados: estados[0]
             });
         } catch (error) {
             return response.status(500).json({
