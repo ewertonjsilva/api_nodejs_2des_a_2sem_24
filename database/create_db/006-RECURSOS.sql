@@ -43,7 +43,36 @@ DELETE FROM endereco_clientes;
 DELETE FROM clientes;
 DELETE FROM usuarios;
 
-
-
 -- RESETAR AUTO INCREMENTO - APENAS DAS TABELAS QUE TEM A CHAVE PRIMÁRIA COMO AUTOINCREMENTO
 ALTER TABLE usuarios AUTO_INCREMENT = 1;
+
+
+-- COMANDOS API
+
+SELECT usu_id FROM usuarios 
+WHERE usu_email = 'gbezsousa@gmail.com';
+
+SELECT usu_id, usu_nome, usu_tipo FROM usuarios 
+WHERE usu_email = 'gbezsousa@gmail.com' AND usu_senha = '123' AND usu_ativo = 1;
+
+SELECT DISTINCT cid_uf FROM cidades ORDER BY cid_uf ASC;
+
+SELECT 
+prd.prd_id, prd.prd_nome, prd.prd_valor, prd.prd_unidade, pdt.ptp_icone, prd.prd_img, prd.prd_descricao 
+FROM produtos prd 
+INNER JOIN produto_tipos pdt ON pdt.ptp_id = prd.ptp_id 
+WHERE prd.prd_disponivel = 1 AND prd.prd_nome LIKE '%%' AND prd.ptp_id LIKE '%%' AND prd.prd_valor < 1000; 
+
+SELECT MAX(prd_valor) vlr_max FROM produtos; 
+
+-- listar ingredientes do produto
+SELECT ing.ing_nome 
+FROM produto_ingredientes pi 
+INNER JOIN ingredientes ing ON ing.ing_id = pi.ing_id 
+WHERE pi.prd_id = 1 AND pi.prd_ing_adicional = 0; 
+
+-- listar opções de adicionais do produto
+SELECT ing.ing_nome 
+FROM produto_ingredientes pi 
+INNER JOIN ingredientes ing ON ing.ing_id = pi.ing_id 
+WHERE pi.prd_id = 1 AND pi.prd_ing_adicional = 1; 
