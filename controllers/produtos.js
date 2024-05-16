@@ -4,7 +4,7 @@ module.exports = {
     async listarProdutos(request, response) {
 
         const { prd_nome, ptp_id, prd_valor } = request.body; 
-        const prd_disponivel = 1
+        const prd_disponivel = 1; 
         const prdPesqNm = prd_nome ? `%${prd_nome}%` : `%%`;
         const prdPesqTp = ptp_id ? `%${ptp_id}%` : `%%`; 
 

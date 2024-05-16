@@ -3,12 +3,26 @@ const db = require('../database/connection');
 module.exports = {
     async listarClientes(request, response) {
         try {
+            const { usu_nome, cli_cel } = request.body; 
 
-            // listar apenas usuários ativos
-            const sql = `SELECT usu_id, cli_cel, cli_pts FROM clientes;`;
+            const pesqNome = usu_nome ? `%${usu_nome}%` : `%%`;             
+            const usu_ativo = 1; 
+            const end_principal = 1;
+            const campo = cli_cel ? 'cl.cli_cel =' : 'us.usu_nome LIKE'; 
+            const campoPesq = cli_cel ? cli_cel : pesqNome;
 
-            const clientes = await db.query(sql);
-            const nItens = clientes[0].length;
+            const sql = `SELECT us.usu_nome, us.usu_dt_nasc, cl.cli_cel, cl.cli_pts, cid.cid_nome 
+                FROM clientes cl
+                INNER JOIN usuarios us ON us.usu_id = cl.usu_id 
+                INNER JOIN endereco_clientes edcl ON edcl.usu_id = cl.usu_id 
+                INNER JOIN cidades cid ON cid.cid_id = edcl.cid_id 
+                WHERE us.usu_ativo = ? AND edcl.end_principal = ? AND ${campo} ?;`;
+
+                const values = [usu_ativo, end_principal, campoPesq];
+
+                const clientes = await db.query(sql, values);
+                
+                const nItens = clientes[0].length;
 
             return response.status(200).json({
                 sucesso: true,
