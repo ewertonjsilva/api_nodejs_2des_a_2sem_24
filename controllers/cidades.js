@@ -4,7 +4,7 @@ module.exports = {
     async listarCidades(request, response) {
         try {
             const { cid_uf, cid_nome } = request.body; 
-            const cidPesq = `%${cid_nome}%`;
+            const cidPesq = cid_nome ? `${cid_nome}%` : `%%`;
             const sql = `SELECT 
                 cid_id, cid_nome, cid_uf 
                 FROM cidades 

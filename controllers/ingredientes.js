@@ -4,7 +4,7 @@ module.exports = {
     async listarIngredientes(request, response) {
         try {
             const { ing_nome } = request.body; 
-            const ingPesq = `%${ing_nome}%`;
+            const ingPesq = ing_nome ? `%${ing_nome}%` : `%%`;
             const sql = `SELECT 
                 ing_id, ing_nome, ing_img, ing_custo_adicional 
                 FROM ingredientes 

@@ -16,7 +16,7 @@ module.exports = {
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na requisição.',
+                mensagem: 'Erro na identificação do valor do produto.',
                 dados: error.message
             });
         }
