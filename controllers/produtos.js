@@ -3,15 +3,18 @@ const db = require('../database/connection');
 module.exports = {
     async listarProdutos(request, response) {
 
-        const { prd_nome, ptp_id, prd_valor } = request.body; 
-        const prd_disponivel = 1; 
+        const { page = 1, limit = 5 } = request.query; 
+        const inicio = (page -1) * limit;
+
+        const { prd_nome, ptp_id, prd_valor } = request.body;
+        const prd_disponivel = 1;
         const prdPesqNm = prd_nome ? `%${prd_nome}%` : `%%`;
-        const prdPesqTp = ptp_id ? `%${ptp_id}%` : `%%`; 
+        const prdPesqTp = ptp_id ? `%${ptp_id}%` : `%%`;
 
         try {
-            const sqlMaxVlr = 'SELECT MAX(prd_valor) vlr_max FROM produtos;'; 
-            const vlrMax = await db.query(sqlMaxVlr); 
-            var prdPesqVlr = prd_valor ? prd_valor : parseFloat(vlrMax[0][0].vlr_max) + 1; 
+            const sqlMaxVlr = 'SELECT MAX(prd_valor) vlr_max FROM produtos;';
+            const vlrMax = await db.query(sqlMaxVlr);
+            var prdPesqVlr = prd_valor ? prd_valor : parseFloat(vlrMax[0][0].vlr_max) + 1;
 
         } catch (error) {
             return response.status(500).json({
@@ -28,12 +31,13 @@ module.exports = {
             FROM produtos prd 
             INNER JOIN produto_tipos pdt ON pdt.ptp_id = prd.ptp_id 
             WHERE prd.prd_disponivel = ? AND prd.prd_nome LIKE ? AND prd.ptp_id LIKE ? 
-            AND prd.prd_valor < ?;`; 
-            
-            const values = [prd_disponivel, prdPesqNm, prdPesqTp, prdPesqVlr];
+            AND prd.prd_valor < ?
+            LIMIT ?, ?;`;
+
+            const values = [prd_disponivel, prdPesqNm, prdPesqTp, prdPesqVlr, parseInt(inicio), parseInt(limit)];
 
             const produtos = await db.query(sql, values);
-            
+
             const nItens = produtos[0].length;
 
             return response.status(200).json({
@@ -86,6 +90,31 @@ module.exports = {
                 sucesso: true,
                 mensagem: 'Apagar produtos.',
                 dados: null
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
+            });
+        }
+    },
+    async listarPromocoes(request, response) {
+        try {
+
+            const sql = `SELECT prd_img_destaque FROM produtos 
+                WHERE prd_destaque = 1 
+                ORDER BY RAND() 
+                LIMIT 3; `;
+
+            const promo = await db.query(sql);
+            const nItens = promo[0].length;
+
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Itens na promoção.',
+                dados: promo[0],
+                nItens
             });
         } catch (error) {
             return response.status(500).json({

@@ -23,6 +23,7 @@ router.delete('/usuarios/del/:usu_id', UsuariosController.ocultarUsuario); // pa
 router.post('/usuarios/login', UsuariosController.login); //body
 
 router.get('/produtos', ProdutosController.listarProdutos); 
+router.get('/produtos/promocoes', ProdutosController.listarPromocoes); 
 router.post('/produtos', ProdutosController.cadastrarProdutos); 
 router.patch('/produtos', ProdutosController.editarProdutos); 
 router.delete('/produtos', ProdutosController.apagarProdutos); 
