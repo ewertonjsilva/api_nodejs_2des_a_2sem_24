@@ -41,8 +41,20 @@ module.exports = {
     async cadastrarClientes(request, response) {
         try {
 
-            const { usu_id, cli_cel } = request.body;
+            const { usu_nome, usu_email, usu_dt_nasc, usu_senha, cli_cel } = request.body;
+            const usu_tipo = 2;
+            const usu_ativo = 1;
             const cli_pts = 0;
+
+            const sqlUsu = `INSERT INTO usuarios 
+                (usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo) 
+                VALUES (?, ?, ?, ?, ?, ?)`;
+            // definição dos dados a serem inseridos em um array
+            const valuesUsu = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo];
+            // execução da instrução sql passando os parâmetros
+            const execSql = await db.query(sqlUsu, valuesUsu);
+            // identificação do ID do registro inserido
+            const usu_id = execSql[0].insertId;            
 
             const sql = `INSERT INTO clientes 
                     (usu_id, cli_cel, cli_pts) 

@@ -32,6 +32,13 @@ module.exports = {
 
             const { usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal } = request.body;
             const end_excluido = false;
+
+            if (end_principal == true) {
+                const sqlUpdateEnd = `UPDATE endereco_clientes SET end_principal = 0 WHERE usu_id = ?;`; 
+                const valuesUpdateEnd = [usu_id]; 
+                await db.query(sqlUpdateEnd, valuesUpdateEnd);
+            }
+
             const sql = `INSERT INTO endereco_clientes 
                 (usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal, end_excluido) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?);`;
