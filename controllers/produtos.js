@@ -1,4 +1,30 @@
-const db = require('../database/connection');
+const db = require('../database/connection'); 
+var fse = require('fs-extra');
+
+function geraUrl (e) { 
+
+    // garantir que valores em branco carreguem algo
+    let img = e.prd_img ? e.prd_img : 'sem.jpg';
+    // verifica se imagem existe
+    if (!fse.existsSync('./public/upload/produtos/' + img)) {
+        img = 'sem.jpg';
+    }    
+
+    const produto = {
+        prd_id: e.prd_id, 
+        prd_nome: e.prd_nome, 
+		ptp_id: e.ptp_id, 
+		ptp_nome: e.ptp_nome, 
+		prd_valor: e.prd_valor, 
+		prd_unidade: e.prd_unidade, 
+		prd_disponivel: e.prd_disponivel, 
+		prd_img: 'http://10.67.22.145:3333/public/upload/produtos/' + img, 
+		prd_destaque: e.prd_destaque, 
+		prd_img_destaque: e.prd_img_destaque, 
+		prd_descricao: e.prd_descricao
+    }
+    return produto;
+}
 
 module.exports = {
     async listarProdutos(request, response) {
@@ -25,6 +51,10 @@ module.exports = {
         }
 
         try {
+
+            // contagem total produtos disponíveis
+
+            // Listagem itens
             const sql = `SELECT 
             prd.prd_id, prd.prd_nome, prd.prd_valor, prd.prd_unidade, pdt.ptp_icone, 
             prd.prd_img, prd.prd_descricao 
@@ -38,12 +68,15 @@ module.exports = {
 
             const produtos = await db.query(sql, values);
 
-            const nItens = produtos[0].length;
+            const nItens = produtos[0].length; 
+
+            // chamada para montar url
+            const resultado = produtos[0].map(geraUrl);
 
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Lista de produtos.',
-                dados: produtos[0],
+                dados: resultado,
                 nItens
             });
         } catch (error) {

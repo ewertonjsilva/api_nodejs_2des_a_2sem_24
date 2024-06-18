@@ -14,6 +14,7 @@ const PedidosController = require('../controllers/pedidos');
 const ProdutoIngredientesController = require('../controllers/produtoIngredientes');
 const ProdutoTiposController = require('../controllers/produtoTipos');
 
+const upload = require('../middlewares/uploadImage');
 
 router.get('/usuarios', UsuariosController.listarUsuarios); 
 router.post('/usuarios', UsuariosController.cadastrarUsuarios); //body
@@ -24,7 +25,7 @@ router.post('/usuarios/login', UsuariosController.login); //body
 
 router.get('/produtos', ProdutosController.listarProdutos); 
 router.get('/produtos/promocoes', ProdutosController.listarPromocoes); 
-router.post('/produtos', ProdutosController.cadastrarProdutos); 
+router.post('/produtos', upload.single('img'), ProdutosController.cadastrarProdutos); 
 router.patch('/produtos', ProdutosController.editarProdutos); 
 router.delete('/produtos', ProdutosController.apagarProdutos); 
 
