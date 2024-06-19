@@ -53,6 +53,11 @@ module.exports = {
         try {
 
             // contagem total produtos disponíveis
+            const sqlCount = `SELECT COUNT(*) AS cont_tt_prod FROM produtos prd 
+            WHERE prd.prd_disponivel = ? AND prd.prd_nome LIKE ? AND prd.ptp_id LIKE ? 
+            AND prd.prd_valor < ?;`;
+            const valuesCount = [prd_disponivel, prdPesqNm, prdPesqTp, prdPesqVlr]; 
+            const ttProdutos = await db.query(sqlCount, valuesCount);
 
             // Listagem itens
             const sql = `SELECT 
@@ -72,6 +77,9 @@ module.exports = {
 
             // chamada para montar url
             const resultado = produtos[0].map(geraUrl);
+
+            // total de produtos no cabeçalho
+            response.header('X-Total-Count', ttProdutos[0][0].cont_tt_prod);  
 
             return response.status(200).json({
                 sucesso: true,
