@@ -18,7 +18,7 @@ function geraUrl (e) {
 		prd_valor: e.prd_valor, 
 		prd_unidade: e.prd_unidade, 
 		prd_disponivel: e.prd_disponivel, 
-		prd_img: 'http://10.67.22.145:3333/public/upload/produtos/' + img, 
+		prd_img: 'http://10.67.22.143:3333/public/upload/produtos/' + img, 
 		prd_destaque: e.prd_destaque, 
 		prd_img_destaque: e.prd_img_destaque, 
 		prd_descricao: e.prd_descricao
@@ -97,10 +97,40 @@ module.exports = {
     },
     async cadastrarProdutos(request, response) {
         try {
+
+            const { nome, valor, unidade, tipo, disponivel, descricao } = request.body;  
+            const destaque = 0;
+            const img_destaque = null;            
+            const img = request.file.filename;
+            
+            // instrução sql para inserção
+            const sql = `INSERT INTO produtos 
+                (prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) 
+                VALUES 
+                (?, ?, ?, ?, ?, ?, ?, ?, ?)`; 
+            
+                // definição de array com os parâmetros que receberam os valores do front-end
+            const values = [nome, parseFloat(valor), unidade, parseInt(tipo), parseInt(disponivel), img, destaque, img_destaque, descricao]; 
+            
+            // executa a instrução de inserção no banco de dados       
+            const confirmacao = await db.query(sql, values);
+            // Exibe o id do registro inserido
+            const prd_id = confirmacao[0].insertId; 
+            // Mensagem de retorno no formato JSON
+            const dados = {
+                id: prd_id, 
+                nome, 
+                valor: parseFloat(valor).toFixed(2), 
+                unidade, 
+                tipo, 
+                disponivel, 
+                img: 'http://localhost:3333/public/upload/produtos/' + img
+            };
+
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Cadastro de produtos.',
-                dados: null
+                mensagem: 'Produto cadastrado com sucesso.',
+                dados
             });
         } catch (error) {
             return response.status(500).json({
