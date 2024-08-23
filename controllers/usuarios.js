@@ -156,7 +156,7 @@ module.exports = {
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Login efetuado com sucesso',
-                dados: usuarios[0]
+                dados: usuarios[0][0]
             });
         } catch (error) {
             return response.status(500).json({
