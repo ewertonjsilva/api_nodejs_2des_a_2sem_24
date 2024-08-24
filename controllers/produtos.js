@@ -18,7 +18,7 @@ function geraUrl (e) {
 		prd_valor: e.prd_valor, 
 		prd_unidade: e.prd_unidade, 
 		prd_disponivel: e.prd_disponivel, 
-		prd_img: 'http://10.67.22.143:3333/public/upload/produtos/' + img, 
+		prd_img: 'http://10.67.22.146:3333/public/upload/produtos/' + img, 
 		prd_destaque: e.prd_destaque, 
 		prd_img_destaque: e.prd_img_destaque, 
 		prd_descricao: e.prd_descricao
