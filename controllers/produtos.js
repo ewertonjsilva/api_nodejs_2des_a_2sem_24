@@ -124,7 +124,7 @@ module.exports = {
                 unidade, 
                 tipo, 
                 disponivel, 
-                img: 'http://localhost:3333/public/upload/produtos/' + img
+                img: 'http://10.67.22.146:3333/public/upload/produtos/' + img
             };
 
             return response.status(200).json({

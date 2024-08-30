@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS PEDIDO_PRODUTOS (
 );
 
 CREATE TABLE IF NOT EXISTS CLIENTES (
-	usu_id int NOT NULL,
+	usu_id int NOT NULL, 	
 	cli_cel varchar(11) NOT NULL,
 	cli_pts int NOT NULL,
 	PRIMARY KEY (usu_id)
