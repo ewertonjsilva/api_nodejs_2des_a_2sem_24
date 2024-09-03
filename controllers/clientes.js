@@ -42,7 +42,8 @@ module.exports = {
         try {
 
             const { usu_nome, usu_email, usu_dt_nasc, usu_senha, cli_cel } = request.body;
-            // usu_nome, usu_email, cid_id, end_logradouro, end_num, end_bairro, end_complemento, cli_cel, usu_senha
+            // usu_nome, usu_dt_nasc, usu_email, cid_id, end_logradouro, end_num, end_bairro, end_complemento, cli_cel, usu_senha
+
             const usu_tipo = 2;
             const usu_ativo = 1;
             const cli_pts = 0;
