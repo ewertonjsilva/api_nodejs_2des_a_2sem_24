@@ -38,7 +38,7 @@ router.get('/clientes', ClientesController.listarClientes);
 router.post('/clientes', ClientesController.cadastrarClientes); 
 router.patch('/clientes/:usu_id', ClientesController.editarClientes); 
  
-router.get('/cidades', CidadesController.listarCidades); 
+router.post('/cidades', CidadesController.listarCidades); 
 router.get('/ufs', CidadesController.listarUfs); 
 
 router.get('/enderecoclientes', EnderecoClientesController.listarEnderecoClientes); 
