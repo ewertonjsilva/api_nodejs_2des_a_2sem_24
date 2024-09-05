@@ -4,12 +4,12 @@
 
 -- USUARIOS
 -- usu_tipo: 0 - ADM, 1 - Restaurante, 2 - Cliente
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (1, 'Thomas Francisco Corte Real', 'thomasfranciscocortereal@kaynak.com.br', '123456', 0, true, '1990-10-08');
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (2, 'Mateus Vitor Lima', 'mateusvitorlima@abcturismo.com.br', '123456', 1, true, '1998-11-06');
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (3, 'Rosângela Marina Nicole Aragão', 'rosangela_marina_aragao@vivo.com.br', '123456',  1, true, '1993-05-10');
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (4, 'Severino Márcio João Ribeiro', 'severino-ribeiro95@advocaciand.adv.br', '123456', 2, true, '2000-02-18');
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (5, 'Mariah Sebastiana Assunção', 'mariah_assuncao@queirozgalvao.com', '123456', 2, false, '1982-12-30');
-INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc) VALUES (6, 'Rosângela Marina Nicole Aragão', 'rosangela_marina_aragao@vivo.com.br', '123456', 2, true, '1970-10-22');
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc, usu_cpf) VALUES (1, 'Thomas Francisco Corte Real', 'thomasfranciscocortereal@kaynak.com.br', '123456', 0, true, '1990-10-08', 81088713874);
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc, usu_cpf) VALUES (2, 'Mateus Vitor Lima', 'mateusvitorlima@abcturismo.com.br', '123456', 1, true, '1998-11-06', 27604623824);
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc, usu_cpf) VALUES (3, 'Rosângela Marina Nicole Aragão', 'rosangela_marina_aragao@vivo.com.br', '123456',  1, true, '1993-05-10', 53627215850);
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc, usu_cpf) VALUES (4, 'Severino Márcio João Ribeiro', 'severino-ribeiro95@advocaciand.adv.br', '123456', 2, true, '2000-02-18', 36068098834);
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc, usu_cpf) VALUES (5, 'Mariah Sebastiana Assunção', 'mariah_assuncao@queirozgalvao.com', '123456', 2, false, '1982-12-30', 83376065845);
+INSERT INTO usuarios (usu_id, usu_nome, usu_email, usu_senha, usu_tipo, usu_ativo, usu_dt_nasc, usu_cpf) VALUES (6, 'Rosângela Marina Nicole Aragão', 'rosangela_marina_aragao@vivo.com.br', '123456', 2, true, '1970-10-22', 12694357873);
 
 -- TIPOS DE PRODUTO
 INSERT INTO produto_tipos (ptp_id, ptp_nome, ptp_icone) VALUES (1, 'Lanche', 'lanche.svg'); 
@@ -18,15 +18,21 @@ INSERT INTO produto_tipos (ptp_id, ptp_nome, ptp_icone) VALUES (3, 'Suco', 'suco
 INSERT INTO produto_tipos (ptp_id, ptp_nome, ptp_icone) VALUES (4, 'Sobremesa', 'doce.svg');
 
 -- PRODUTOS
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (1, 'Lanche de Frango', 15.00, 'un.', 1, 1, 'lanche2.jpg', 0, NULL, 'Pão, frango desfiado e temperado');
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (2, 'Lanche de Salmão', 28.00, 'un.', 1, 1, 'lanche1.jpg', 1, NULL, 'Pão, filé de salmão temperado com ervas finas');
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (3, 'Lanche de Salada', 18.00, 'un.', 1, 1, 'sem.jpg', 0, NULL, 'Pão, alface, tomate, rúcula, milho, pepino e aspargo');
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (4, 'Batata frita', 17.20, 'un.', 2, 1, 'fritas.jpg', 1, NULL, 'Batata de qualidade internacional.');
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (5, 'Suco de Abacaxi', 12.00, 'copo', 3, 1, 'sem.jpg', 1, NULL, 'Abacaxi, açucar e gelo'); 
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (6, 'Suco de Uva', 15.00, 'copo', 3, 1, 'sem.jpg', 1, NULL, 'Uva, açucar e gelo'); 
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (7, 'Suco de Laranja', 12.00, 'copo', 3, 1, 'suco1.jpg', 0, 'promoSuco.jpg', 'Laranja, açucar e gelo'); 
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (8, 'Suco de Limão', 12.00, 'copo', 3, 1, 'suco2.jpg', 0, NULL, 'Limão, açucar e gelo');
-INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (9, 'Biscoito', 3.99, 'un.', 4, 0, 'sobremesa1.jpg', 0, NULL, 'Biscoito saboroso');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (1, 'Lanche de Frango Empanado', 31.00, 'un.', 1, 1, 'lancheFrangoEmpanado.jpg', 0, NULL, 'Pão e frango empanado');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (2, 'Lanche de Salmão', 38.00, 'un.', 1, 1, 'lanche1.jpg', 0, NULL, 'Pão, filé de salmão temperado com ervas finas');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (3, 'Lanche de Salada', 28.00, 'un.', 1, 1, 'sem.jpg', 0, NULL, 'Pão, alface, tomate, rúcula, milho, pepino e aspargo');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (4, 'Batata frita', 25.40, 'un.', 2, 1, 'fritas.jpg', 1, 'promoGenerica.png', 'Batata de qualidade internacional.');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (5, 'Suco de Abacaxi', 12.00, 'copo', 3, 1, 'sem.jpg', 0, NULL, 'Abacaxi, açucar e gelo'); 
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (6, 'Suco de Uva', 15.00, 'copo', 3, 1, 'sem.jpg', 0, NULL, 'Uva, açucar e gelo'); 
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (7, 'Suco de Laranja', 6.99, 'copo', 3, 1, 'sucoLaranja.jpg', 1, 'promoSucoLaranja.png', 'Laranja, açucar e gelo'); 
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (8, 'Suco de Limão', 12.00, 'copo', 3, 1, 'sucoLimao.jpg', 0, NULL, 'Limão, açucar e gelo');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (9, 'Biscoito Amanteigado', 12.99, 'un.', 4, 0, 'biscoitoAmanteigado.png', 0, NULL, 'Biscoito saboroso');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (10, 'Lanche de Peixe', 20.99, 'un.', 1, 1, 'lanchePeixe.jpg', 1, 'promoLanchePeixe.png', 'Feito com peixes do aquário');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (11, 'Salada da Casa', 16.99, 'un.', 1, 1, 'salada.jpg', 1, 'promoSaladaDaCasa.png', 'Feito com peixes do aquário');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (12, 'Sorvete Chocolate', 11.00, 'un.', 4, 1, 'sorveteChocolate.jpeg', 0, NULL, 'Refrescante e delicioso');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (13, 'Torta de creme de coco', 19.00, 'un.', 4, 1, 'tortaCremeCoco.jpg', 0, NULL, 'Torta doce e cremosa');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (14, 'Lanche de bacon', 34.00, 'un.', 1, 1, 'hamburger-bacon.jpg', 0, NULL, 'Hamburguer bacon e couve');
+INSERT INTO produtos (prd_id, prd_nome, prd_valor, prd_unidade, ptp_id, prd_disponivel, prd_img, prd_destaque, prd_img_destaque, prd_descricao) VALUES (15, 'Combo hamburguer + batata', 48.00, 'un.', 1, 1, 'hamburger-batata.jpg', 0, NULL, 'Lanche de hamburguer com salada mais uma porção de batata');
 
 -- CLIENTES
 INSERT INTO clientes (usu_id, cli_cel, cli_pts) VALUES (4, '14911112222', 0);
@@ -72,7 +78,7 @@ INSERT INTO pedido_produtos (ppd_id, ppd_hora, ppd_qtd, ppd_valor, ppd_obs, ped_
 INSERT INTO pedido_produtos (ppd_id, ppd_hora, ppd_qtd, ppd_valor, ppd_obs, ped_id, prd_id, ppd_status) VALUES (11, '19:21', 1, 17.20, NULL, 5, 4, 3); 
 INSERT INTO pedido_produtos (ppd_id, ppd_hora, ppd_qtd, ppd_valor, ppd_obs, ped_id, prd_id, ppd_status) VALUES (12, '19:57', 2, 12.00, NULL, 5, 5, 2); 
 
--- INGREDIENTES
+-- INGREDIENTES -------------------- Pegar imagens dos ingredientes
 SELECT ing_id, ing_nome, ing_img, ing_custo_adicional FROM ingredientes;
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (1, 'Pão', 'pao.png', 0.00); 
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (2, 'Frango', 'frango.png', 7.00); 
@@ -80,9 +86,24 @@ INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (4, 'Alface', 'alface.png', 4.50); 
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (5, 'Rúcula', 'rucula.png', 4.00); 
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (6, 'Tomate', 'tomate.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (7, 'Ervilha', 'ervilha.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (8, 'Milho', 'milho.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (9, 'Pepino', 'pepino.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (10, 'Cebola', 'cebola.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (11, 'Cebola Roxa', 'cebolaRoxa.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (12, 'Aspargo', 'aspargo.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (13, 'Batata', 'batata.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (14, 'Uva', 'uva.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (15, 'Abacaxi', 'abacaxi.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (16, 'Limão', 'limao.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (17, 'Laranja', 'laranja.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (18, 'Bacon', 'bacon.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (19, 'Couve', 'couve.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (20, 'Carne bovina', 'carneBovina.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (21, 'Carne suína', 'carneSuina.png', 5.25); 
 
 
--- PRODUTO INGREDIENTES
+-- PRODUTO INGREDIENTES ---------------- adicionar de produtos que faltam - obs: nem todos produtos precisam, ex sorvete de chocolate, torta ou biscoito amanteigado
 SELECT prd_id, ing_id, prd_ing_adicional FROM produto_ingredientes;
 INSERT INTO produto_ingredientes (prd_id, ing_id, prd_ing_adicional) VALUES (1, 1, false); 
 INSERT INTO produto_ingredientes (prd_id, ing_id, prd_ing_adicional) VALUES (2, 1, false); 

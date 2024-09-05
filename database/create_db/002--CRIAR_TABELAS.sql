@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS USUARIOS (
 	usu_email varchar(80) NOT NULL, 
 	usu_senha varchar(255) NOT NULL, 
 	usu_dt_nasc date NOT NULL, -- NÃO PODE SER EDITADO
+	usu_cpf bigint NOT NULL UNIQUE, 
 	usu_tipo tinyint NOT NULL, 
 	usu_ativo bit NOT NULL, 
 	PRIMARY KEY (usu_id)
