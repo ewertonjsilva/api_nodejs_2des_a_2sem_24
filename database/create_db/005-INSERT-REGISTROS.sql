@@ -86,21 +86,21 @@ INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (4, 'Alface', 'alface.png', 4.50); 
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (5, 'Rúcula', 'rucula.png', 4.00); 
 INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (6, 'Tomate', 'tomate.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (7, 'Ervilha', 'ervilha.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (8, 'Milho', 'milho.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (9, 'Pepino', 'pepino.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (10, 'Cebola', 'cebola.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (11, 'Cebola Roxa', 'cebolaRoxa.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (12, 'Aspargo', 'aspargo.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (13, 'Batata', 'batata.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (14, 'Uva', 'uva.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (15, 'Abacaxi', 'abacaxi.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (16, 'Limão', 'limao.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (17, 'Laranja', 'laranja.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (18, 'Bacon', 'bacon.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (19, 'Couve', 'couve.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (20, 'Carne bovina', 'carneBovina.png', 5.25); 
-INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (21, 'Carne suína', 'carneSuina.png', 5.25); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (7, 'Ervilha', 'ervilha.png', 6.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (8, 'Milho', 'milho.png', 5.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (9, 'Pepino', 'pepino.png', 4.50); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (10, 'Cebola', 'cebola.png', 4.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (11, 'Cebola Roxa', 'cebolaRoxa.png', 4.80); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (12, 'Aspargo', 'aspargo.png', 5.90); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (13, 'Batata', 'batata.png', 25.40); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (14, 'Uva', 'uva.png', 0.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (15, 'Abacaxi', 'abacaxi.png', 0.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (16, 'Limão', 'limao.png', 0.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (17, 'Laranja', 'laranja.png', 0.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (18, 'Bacon', 'bacon.png', 6.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (19, 'Couve', 'couve.png', 5.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (20, 'Carne bovina', 'carneBovina.png', 8.00); 
+INSERT INTO ingredientes (ing_id, ing_nome, ing_img, ing_custo_adicional) VALUES (21, 'Carne suína', 'carneSuina.png', 7.00); 
 
 
 -- PRODUTO INGREDIENTES ---------------- adicionar de produtos que faltam - obs: nem todos produtos precisam, ex sorvete de chocolate, torta ou biscoito amanteigado

@@ -1,12 +1,18 @@
 const db = require('../database/connection');
 const moment = require('moment');
 
+function cpfToInt (cpf) {
+    const cpfSemMascara = cpf.replace(/\D/g, '');
+    const cpfInteiro = parseInt(cpfSemMascara);
+    return cpfInteiro;
+};
+
 module.exports = {
     async listarClientes(request, response) {
         try {
             const { usu_nome, usu_cpf, cli_cel } = request.body;
 
-            const pesqNome = usu_nome ? `%${usu_nome}%` : `%%`;            
+            const pesqNome = usu_nome ? `%${usu_nome}%` : `%%`;
             const usu_ativo = 1;
             const end_principal = 1;
             const campo = cli_cel ? 'cl.cli_cel = ' : usu_cpf ? 'us.usu_cpf = ' : 'us.usu_nome LIKE ';
@@ -42,8 +48,10 @@ module.exports = {
     async cadastrarClientes(request, response) {
         try {
 
-            const { usu_nome, usu_email, usu_senha, usu_dt_nasc, end_logradouro, end_num, end_bairro, end_complemento, cid_id, cli_cel } = request.body;
+            const { usu_nome, usu_email, usu_senha, usu_dt_nasc, usu_cpf, end_logradouro, end_num, end_bairro, end_complemento, cid_id, cli_cel } = request.body;
 
+            const cpf = cpfToInt(usu_cpf)
+            
             // converter data nascimento
             // Data no formato brasileiro
             // const dataBrasileira = usu_dt_nasc;
@@ -58,10 +66,10 @@ module.exports = {
             const end_excluido = false;
 
             const sqlUsu = `INSERT INTO usuarios 
-                (usu_nome, usu_email, usu_senha, usu_dt_nasc, usu_tipo, usu_ativo) 
-                VALUES (?, ?, ?, ?, ?, ?)`;
+                (usu_nome, usu_email, usu_senha, usu_dt_nasc, usu_cpf, usu_tipo, usu_ativo) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)`;
             // definição dos dados a serem inseridos em um array
-            const valuesUsu = [usu_nome, usu_email, usu_senha, usu_dt_nasc, usu_tipo, usu_ativo];
+            const valuesUsu = [usu_nome, usu_email, usu_senha, usu_dt_nasc, cpf, usu_tipo, usu_ativo];
             // execução da instrução sql passando os parâmetros
             const execSql = await db.query(sqlUsu, valuesUsu);
             // identificação do ID do registro inserido

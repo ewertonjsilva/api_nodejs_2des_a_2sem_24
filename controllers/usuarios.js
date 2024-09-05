@@ -1,5 +1,11 @@
 const db = require('../database/connection');
 
+function cpfToInt (cpf) {
+    const cpfSemMascara = cpf.replace(/\D/g, '');
+    const cpfInteiro = parseInt(cpfSemMascara);
+    return cpfInteiro;
+};
+
 module.exports = {
     async listarUsuarios(request, response) {
         try {
@@ -31,13 +37,16 @@ module.exports = {
     async cadastrarUsuarios(request, response) {
         try {
             // parâmetros recebidos no corpo da requisição
-            const { usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf } = request.body;
+            const { usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_cpf } = request.body;
+            const usu_ativo = 1;
+            const cpf = cpfToInt(usu_cpf)
+
             // instrução SQL
             const sql = `INSERT INTO usuarios 
                 (usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf) 
-                VALUES (?, ?, ?, ?, ?, ?)`;
+                VALUES (?, ?, ?, ?, ?, ?, ?)`;
             // definição dos dados a serem inseridos em um array
-            const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf];
+            const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, cpf];
             // execução da instrução sql passando os parâmetros
             const execSql = await db.query(sql, values);
             // identificação do ID do registro inserido
