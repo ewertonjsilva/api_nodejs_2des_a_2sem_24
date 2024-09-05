@@ -4,13 +4,13 @@ const moment = require('moment');
 module.exports = {
     async listarClientes(request, response) {
         try {
-            const { usu_nome, cli_cel } = request.body;
+            const { usu_nome, usu_cpf, cli_cel } = request.body;
 
-            const pesqNome = usu_nome ? `%${usu_nome}%` : `%%`;
+            const pesqNome = usu_nome ? `%${usu_nome}%` : `%%`;            
             const usu_ativo = 1;
             const end_principal = 1;
-            const campo = cli_cel ? 'cl.cli_cel =' : 'us.usu_nome LIKE';
-            const campoPesq = cli_cel ? cli_cel : pesqNome;
+            const campo = cli_cel ? 'cl.cli_cel = ' : usu_cpf ? 'us.usu_cpf = ' : 'us.usu_nome LIKE ';
+            const campoPesq = cli_cel ? cli_cel : usu_cpf ? usu_cpf : pesqNome;
 
             const sql = `SELECT us.usu_nome, us.usu_dt_nasc, cl.cli_cel, cl.cli_pts, cid.cid_nome 
                 FROM clientes cl

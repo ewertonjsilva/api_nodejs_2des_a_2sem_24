@@ -6,7 +6,7 @@ module.exports = {
             // instruções SQL
             const sql = `SELECT 
                 usu_id, usu_nome, usu_email, usu_dt_nasc, usu_senha, 
-                usu_tipo, usu_ativo = 1 AS usu_ativo  
+                usu_tipo, usu_cpf, usu_ativo = 1 AS usu_ativo  
                 FROM usuarios 
                 WHERE usu_ativo = 1;`;
             // executa instruções SQL e armazena o resultado na variável usuários
@@ -31,13 +31,13 @@ module.exports = {
     async cadastrarUsuarios(request, response) {
         try {
             // parâmetros recebidos no corpo da requisição
-            const { usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo } = request.body;
+            const { usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf } = request.body;
             // instrução SQL
             const sql = `INSERT INTO usuarios 
-                (usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo) 
+                (usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf) 
                 VALUES (?, ?, ?, ?, ?, ?)`;
             // definição dos dados a serem inseridos em um array
-            const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo];
+            const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf];
             // execução da instrução sql passando os parâmetros
             const execSql = await db.query(sql, values);
             // identificação do ID do registro inserido
