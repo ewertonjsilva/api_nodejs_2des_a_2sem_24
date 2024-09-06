@@ -24,6 +24,7 @@ router.delete('/usuarios/del/:usu_id', UsuariosController.ocultarUsuario); // pa
 router.post('/usuarios/login', UsuariosController.login); //body
 
 router.get('/produtos', ProdutosController.listarProdutos); 
+router.get('/produtos/home', ProdutosController.listarProdutosHome); 
 router.get('/produtos/promocoes', ProdutosController.listarPromocoes); 
 router.post('/produtos', upload.single('img'), ProdutosController.cadastrarProdutos); 
 router.patch('/produtos', ProdutosController.editarProdutos); 

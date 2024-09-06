@@ -1,9 +1,15 @@
 const db = require('../database/connection');
 
-function cpfToInt (cpf) {
+function cpfToInt(cpf) {
     const cpfSemMascara = cpf.replace(/\D/g, '');
     const cpfInteiro = parseInt(cpfSemMascara);
     return cpfInteiro;
+};
+
+const intToCpfFormat = (cpfInt) => {
+    const cpfFormatado = cpfInt.toString().padStart(11, '0');
+    const cpfComMascara = cpfFormatado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    return cpfComMascara;
 };
 
 module.exports = {
@@ -20,10 +26,16 @@ module.exports = {
             // armazena em uma variável o número de registros retornados
             const nItens = usuarios[0].length;
 
+            // Itera sobre os usuários e formata o CPF
+            const usuariosFormatados = usuarios[0].map(usuario => ({
+                ...usuario,
+                usu_cpf: intToCpfFormat(usuario.usu_cpf)
+            }));
+
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Lista de usuários.',
-                dados: usuarios[0],
+                dados: usuariosFormatados,
                 nItens
             });
         } catch (error) {
@@ -39,7 +51,7 @@ module.exports = {
             // parâmetros recebidos no corpo da requisição
             const { usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_cpf } = request.body;
             const usu_ativo = 1;
-            const cpf = cpfToInt(usu_cpf)
+            const cpf = cpfToInt(usu_cpf);            
 
             // instrução SQL
             const sql = `INSERT INTO usuarios 
@@ -118,16 +130,16 @@ module.exports = {
                 dados: error.message
             });
         }
-    }, 
+    },
     async ocultarUsuario(request, response) {
         try {
-            const usu_ativo = false; 
-            const { usu_id } = request.params; 
+            const usu_ativo = false;
+            const { usu_id } = request.params;
             const sql = `UPDATE usuarios SET usu_ativo = ? 
                 WHERE usu_id = ?;`;
-            const values = [usu_ativo, usu_id]; 
-            const atualizacao = await db.query(sql, values); 
-            
+            const values = [usu_ativo, usu_id];
+            const atualizacao = await db.query(sql, values);
+
             return response.status(200).json({
                 sucesso: true,
                 mensagem: `Usuário ${usu_id} excluído com sucesso`,
@@ -140,7 +152,7 @@ module.exports = {
                 dados: error.message
             });
         }
-    }, 
+    },
     async login(request, response) {
         try {
 
@@ -152,7 +164,7 @@ module.exports = {
             const values = [usu_email, usu_senha];
 
             const usuarios = await db.query(sql, values);
-            const nItens = usuarios[0].length; 
+            const nItens = usuarios[0].length;
 
             if (nItens < 1) {
                 return response.status(403).json({

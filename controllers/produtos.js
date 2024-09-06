@@ -1,29 +1,51 @@
 const db = require('../database/connection'); 
 var fse = require('fs-extra');
 
-function geraUrl (e) { 
+// function geraUrl (e) { 
 
+//     // garantir que valores em branco carreguem algo
+//     let img = e.prd_img ? e.prd_img : 'sem.jpg';
+//     // verifica se imagem existe
+//     if (!fse.existsSync('./public/upload/produtos/' + img)) {
+//         img = 'sem.jpg';
+//     }    
+
+//     const produto = {
+//         prd_id: e.prd_id, 
+//         prd_nome: e.prd_nome, 
+// 		ptp_id: e.ptp_id, 
+// 		ptp_nome: e.ptp_nome, 
+// 		prd_valor: e.prd_valor, 
+// 		prd_unidade: e.prd_unidade, 
+// 		prd_disponivel: e.prd_disponivel, 
+// 		prd_img: 'http://10.67.22.144:3333/public/upload/produtos/' + img, 
+// 		prd_destaque: e.prd_destaque, 
+// 		prd_img_destaque: e.prd_img_destaque, 
+// 		prd_descricao: e.prd_descricao
+//     }
+//     return produto;
+// }
+
+function geraUrl (prd) {    
     // garantir que valores em branco carreguem algo
-    let img = e.prd_img ? e.prd_img : 'sem.jpg';
+    let img = prd ? prd : 'sem.jpg';
     // verifica se imagem existe
     if (!fse.existsSync('./public/upload/produtos/' + img)) {
         img = 'sem.jpg';
-    }    
+    } 
+    // return 'http://10.67.22.144:3333/public/upload/produtos/' + img; // para usar com img html
+    return '/public/upload/produtos/' + img; //para usar no image do nextjs
+}
 
-    const produto = {
-        prd_id: e.prd_id, 
-        prd_nome: e.prd_nome, 
-		ptp_id: e.ptp_id, 
-		ptp_nome: e.ptp_nome, 
-		prd_valor: e.prd_valor, 
-		prd_unidade: e.prd_unidade, 
-		prd_disponivel: e.prd_disponivel, 
-		prd_img: 'http://10.67.22.146:3333/public/upload/produtos/' + img, 
-		prd_destaque: e.prd_destaque, 
-		prd_img_destaque: e.prd_img_destaque, 
-		prd_descricao: e.prd_descricao
-    }
-    return produto;
+function geraUrlIconePrd (prd) {    
+    // garantir que valores em branco carreguem algo
+    let img = prd ? prd : 'sem.svg';
+    // verifica se imagem existe
+    if (!fse.existsSync('./public/upload/tiposProduto/' + img)) {
+        img = 'sem.svg';
+    } 
+    // return 'http://10.67.22.144:3333/public/upload/produtos/' + img; // para usar com img html
+    return '/public/upload/tiposProduto/' + img; //para usar no image do nextjs
 }
 
 module.exports = {
@@ -41,7 +63,6 @@ module.exports = {
             const sqlMaxVlr = 'SELECT MAX(prd_valor) vlr_max FROM produtos;';
             const vlrMax = await db.query(sqlMaxVlr);
             var prdPesqVlr = prd_valor ? prd_valor : parseFloat(vlrMax[0][0].vlr_max) + 1;
-
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
@@ -76,7 +97,14 @@ module.exports = {
             const nItens = produtos[0].length; 
 
             // chamada para montar url
-            const resultado = produtos[0].map(geraUrl);
+            // const resultado = produtos[0].map(geraUrl); 
+
+            // Itera sobre os usuários e formata o CPF
+            const produtosComLink = produtos[0].map(produto => ({
+                ...produto,
+                prd_img: geraUrl(produto.prd_img), 
+                ptp_icone: geraUrlIconePrd(produto.ptp_icone) 
+            }));
 
             // total de produtos no cabeçalho
             response.header('X-Total-Count', ttProdutos[0][0].cont_tt_prod);  
@@ -84,7 +112,7 @@ module.exports = {
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Lista de produtos.',
-                dados: resultado,
+                dados: produtosComLink,
                 nItens
             });
         } catch (error) {
@@ -124,7 +152,7 @@ module.exports = {
                 unidade, 
                 tipo, 
                 disponivel, 
-                img: 'http://10.67.22.146:3333/public/upload/produtos/' + img
+                img: 'http://10.67.22.144:3333/public/upload/produtos/' + img
             };
 
             return response.status(200).json({
@@ -186,6 +214,41 @@ module.exports = {
                 mensagem: 'Itens na promoção.',
                 dados: promo[0],
                 nItens
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
+            });
+        }
+    }, 
+    async listarProdutosHome(request, response) {
+
+        try {
+
+            // Listagem itens
+            const sql = `SELECT 
+            prd.prd_id, prd.prd_nome, prd.prd_valor, prd.prd_unidade, pdt.ptp_icone, 
+            prd.prd_img, prd.prd_descricao 
+            FROM produtos prd 
+            INNER JOIN produto_tipos pdt ON pdt.ptp_id = prd.ptp_id 
+            WHERE prd.prd_disponivel = 1 
+            ORDER BY RAND() LIMIT 6;`;
+
+            const produtos = await db.query(sql);
+
+            // Itera sobre os usuários e formata o CPF
+            const produtosComLink = produtos[0].map(produto => ({
+                ...produto,
+                prd_img: geraUrl(produto.prd_img), 
+                ptp_icone: geraUrlIconePrd(produto.ptp_icone)
+            }));
+
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: 'Lista de produtos.',
+                dados: produtosComLink,
             });
         } catch (error) {
             return response.status(500).json({

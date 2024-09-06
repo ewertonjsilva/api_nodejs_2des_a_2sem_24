@@ -50,7 +50,9 @@ module.exports = {
 
             const { usu_nome, usu_email, usu_senha, usu_dt_nasc, usu_cpf, end_logradouro, end_num, end_bairro, end_complemento, cid_id, cli_cel } = request.body;
 
-            const cpf = cpfToInt(usu_cpf)
+            const cpf = cpfToInt(usu_cpf); 
+            // Remove a máscara antes de enviar para a API
+            const telefoneSemMascara = cli_cel.replace(/\D/g, '');
             
             // converter data nascimento
             // Data no formato brasileiro
@@ -80,7 +82,7 @@ module.exports = {
                 VALUES 
                     (?, ?, ?);`;
 
-            const valuesCli = [usu_id, cli_cel, cli_pts];
+            const valuesCli = [usu_id, telefoneSemMascara, cli_pts];
 
             await db.query(sqlCli, valuesCli);
 
