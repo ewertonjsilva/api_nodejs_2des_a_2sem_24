@@ -15,14 +15,24 @@ const intToCpfFormat = (cpfInt) => {
 module.exports = {
     async listarUsuarios(request, response) {
         try {
+
+            const { usu_nome, usu_cpf, usu_email } = request.body;
+
+            const pesq_usu_nome = usu_nome ? `%${usu_nome}%` : `%%`;
+            const pesq_usu_cpf = usu_cpf ? `%${usu_cpf}%` : `%%`;
+            const pesq_usu_email = usu_email ? `%${usu_email}%` : `%%`;
+            const usu_ativo = usu_nome ? '' : usu_cpf ? '' : usu_email ? '' : ` AND usu_ativo = 1`;            
+            const values = [pesq_usu_nome, pesq_usu_email, pesq_usu_cpf, usu_ativo];
+            console.log(usu_ativo);
             // instruções SQL
             const sql = `SELECT 
                 usu_id, usu_nome, usu_email, usu_dt_nasc, usu_senha, 
                 usu_tipo, usu_cpf, usu_ativo = 1 AS usu_ativo  
                 FROM usuarios 
-                WHERE usu_ativo = 1;`;
+                WHERE usu_nome like ? AND usu_email like ? AND usu_cpf like ?;`;
+console.log((sql));
             // executa instruções SQL e armazena o resultado na variável usuários
-            const usuarios = await db.query(sql);
+            const usuarios = await db.query(sql, values);
             // armazena em uma variável o número de registros retornados
             const nItens = usuarios[0].length;
 
