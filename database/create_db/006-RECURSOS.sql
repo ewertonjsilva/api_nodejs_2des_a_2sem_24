@@ -7,7 +7,7 @@ SELECT ped_id, ped_data, usu_id, cli_id, ped_tipo, ped_status, ped_desconto, ped
 SELECT end_id, usu_id, end_logradouro, end_num, end_bairro, end_complemento, cid_id, end_principal FROM endereco_clientes; 
 SELECT cid_id, cid_nome, cid_uf FROM cidades;
 SELECT usu_id, cli_cel, cli_pts FROM clientes; 
-SELECT usu_id, usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo FROM usuarios;
+SELECT usu_id, usu_nome, usu_email, usu_cpf, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo FROM usuarios;
 SELECT ing_id, ing_nome, ing_img, ing_custo_adicional FROM ingredientes;
 SELECT prd_id, ing_id, prd_ing_adicional FROM produto_ingredientes;
 

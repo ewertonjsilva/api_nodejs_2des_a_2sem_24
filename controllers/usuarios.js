@@ -21,7 +21,7 @@ module.exports = {
             const pesq_usu_nome = usu_nome ? `%${usu_nome}%` : `%%`;
             const pesq_usu_cpf = usu_cpf ? `%${usu_cpf}%` : `%%`;
             const pesq_usu_email = usu_email ? `%${usu_email}%` : `%%`;
-            const usu_ativo = usu_nome ? '' : usu_cpf ? '' : usu_email ? '' : ` AND usu_ativo = 1`;            
+            const usu_ativo = usu_nome ? '' : usu_cpf ? '' : usu_email ? '' : ` AND usu_ativo = 1`;
             const values = [pesq_usu_nome, pesq_usu_email, pesq_usu_cpf, usu_ativo];
             console.log(usu_ativo);
             // instruções SQL
@@ -30,7 +30,7 @@ module.exports = {
                 usu_tipo, usu_cpf, usu_ativo = 1 AS usu_ativo  
                 FROM usuarios 
                 WHERE usu_nome like ? AND usu_email like ? AND usu_cpf like ?;`;
-console.log((sql));
+            console.log((sql));
             // executa instruções SQL e armazena o resultado na variável usuários
             const usuarios = await db.query(sql, values);
             // armazena em uma variável o número de registros retornados
@@ -61,7 +61,7 @@ console.log((sql));
             // parâmetros recebidos no corpo da requisição
             const { usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_cpf } = request.body;
             const usu_ativo = 1;
-            const cpf = cpfToInt(usu_cpf);            
+            const cpf = cpfToInt(usu_cpf);
 
             // instrução SQL
             const sql = `INSERT INTO usuarios 
