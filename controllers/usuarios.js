@@ -66,7 +66,7 @@ module.exports = {
             // instrução SQL
             const sql = `INSERT INTO usuarios 
                 (usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_cpf) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                VALUES (?, ?, ?, ?, ?, ?, ?);`;
             // definição dos dados a serem inseridos em um array
             const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, cpf];
             // execução da instrução sql passando os parâmetros

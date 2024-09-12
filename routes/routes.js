@@ -49,8 +49,8 @@ router.delete('/enderecoclientes/:end_id', EnderecoClientesController.apagarEnde
 
 router.get('/mesas', MesasController.listarMesas); 
 router.post('/mesas', MesasController.cadastrarMesas); 
-router.patch('/mesas', MesasController.editarMesas); 
-router.delete('/mesas', MesasController.apagarMesas); 
+router.patch('/mesas/:mes_id', MesasController.editarMesas); 
+router.delete('/mesas/:mes_id', MesasController.apagarMesas); 
 
 router.get('/pedidoprodutos', PedidoProdutosController.listarPedidoProdutos); 
 router.post('/pedidoprodutos', PedidoProdutosController.cadastrarPedidoProdutos); 
