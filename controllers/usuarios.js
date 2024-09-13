@@ -26,7 +26,7 @@ module.exports = {
             console.log(usu_ativo);
             // instruções SQL
             const sql = `SELECT 
-                usu_id, usu_nome, usu_email, usu_dt_nasc, usu_senha, 
+                usu_id, usu_nome, usu_email, usu_dt_nasc, 
                 usu_tipo, usu_cpf, usu_ativo = 1 AS usu_ativo  
                 FROM usuarios 
                 WHERE usu_nome like ? AND usu_email like ? AND usu_cpf like ?;`;
