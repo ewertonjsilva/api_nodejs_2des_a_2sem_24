@@ -19,6 +19,7 @@ const upload = require('../middlewares/uploadImage');
 router.get('/usuarios', UsuariosController.listarUsuarios); 
 router.post('/usuarios', UsuariosController.cadastrarUsuarios); //body
 router.patch('/usuarios/:usu_id', UsuariosController.editarUsuarios); // params (URL) e body
+router.patch('/usuario/senha/:usu_id', UsuariosController.atualizaSenha); // params (URL) e body
 router.delete('/usuarios/:usu_id', UsuariosController.apagarUsuarios); // params (URL)
 router.delete('/usuarios/del/:usu_id', UsuariosController.ocultarUsuario); // params (URL) 
 router.post('/usuarios/login', UsuariosController.login); //body

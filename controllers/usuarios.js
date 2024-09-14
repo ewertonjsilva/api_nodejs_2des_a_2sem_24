@@ -1,4 +1,5 @@
-const db = require('../database/connection');
+const db = require('../database/connection'); 
+const moment = require('moment');
 
 function cpfToInt(cpf) {
     const cpfSemMascara = cpf.replace(/\D/g, '');
@@ -12,25 +13,32 @@ const intToCpfFormat = (cpfInt) => {
     return cpfComMascara;
 };
 
+const dataInput = (data) => {
+    // Converte para o formato americano (aaaa-mm-dd)
+    const dataInput = moment(data, 'YYYY/MM/DD').format('YYYY-MM-DD'); 
+    return dataInput;
+}
+
 module.exports = {
     async listarUsuarios(request, response) {
         try {
 
-            const { usu_nome, usu_cpf, usu_email } = request.body;
+            const { usu_id, usu_nome, usu_cpf, usu_email } = request.body;
 
+            const pesq_usu_id = usu_id ? usu_id : `%%`;
             const pesq_usu_nome = usu_nome ? `%${usu_nome}%` : `%%`;
-            const pesq_usu_cpf = usu_cpf ? `%${usu_cpf}%` : `%%`;
+            const pesq_usu_cpf = usu_cpf ? `%${cpfToInt(usu_cpf)}%` : `%%`;
             const pesq_usu_email = usu_email ? `%${usu_email}%` : `%%`;
             const usu_ativo = usu_nome ? '' : usu_cpf ? '' : usu_email ? '' : ` AND usu_ativo = 1`;
-            const values = [pesq_usu_nome, pesq_usu_email, pesq_usu_cpf, usu_ativo];
-            console.log(usu_ativo);
+            const values = [pesq_usu_id, pesq_usu_nome, pesq_usu_email, pesq_usu_cpf, usu_ativo];
+
             // instruções SQL
             const sql = `SELECT 
-                usu_id, usu_nome, usu_email, usu_dt_nasc, 
+                usu_id, usu_nome, usu_email, usu_dt_nasc, usu_senha, 
                 usu_tipo, usu_cpf, usu_ativo = 1 AS usu_ativo  
                 FROM usuarios 
-                WHERE usu_nome like ? AND usu_email like ? AND usu_cpf like ?;`;
-            console.log((sql));
+                WHERE usu_id like ? AND usu_nome like ? AND usu_email like ? AND usu_cpf like ?;`;
+
             // executa instruções SQL e armazena o resultado na variável usuários
             const usuarios = await db.query(sql, values);
             // armazena em uma variável o número de registros retornados
@@ -39,7 +47,8 @@ module.exports = {
             // Itera sobre os usuários e formata o CPF
             const usuariosFormatados = usuarios[0].map(usuario => ({
                 ...usuario,
-                usu_cpf: intToCpfFormat(usuario.usu_cpf)
+                usu_cpf: intToCpfFormat(usuario.usu_cpf), 
+                usu_dt_nasc: dataInput(usuario.usu_dt_nasc)
             }));
 
             return response.status(200).json({
@@ -188,6 +197,34 @@ module.exports = {
                 sucesso: true,
                 mensagem: 'Login efetuado com sucesso',
                 dados: usuarios[0][0]
+            });
+        } catch (error) {
+            return response.status(500).json({
+                sucesso: false,
+                mensagem: 'Erro na requisição.',
+                dados: error.message
+            });
+        }
+    }, 
+    async atualizaSenha(request, response) {
+        try {
+            // parâmetros recebidos pelo corpo da requisição
+            const { usu_senha } = request.body;
+            // parâmetro recebido pela URL via params ex: /usuario/1
+            const { usu_id } = request.params;
+            // instruções SQL
+            const sql = `UPDATE usuarios SET usu_senha = ? 
+                WHERE usu_id = ?;`;
+            // preparo do array com dados que serão atualizados
+            const values = [usu_senha, usu_id];
+            // execução e obtenção de confirmação da atualização realizada
+            const atualizaDados = await db.query(sql, values);
+
+            return response.status(200).json({
+                sucesso: true,
+                mensagem: `Usuário ${usu_id} atualizado com sucesso!`,
+                dados: atualizaDados[0].affectedRows
+                // mensSql: atualizaDados
             });
         } catch (error) {
             return response.status(500).json({

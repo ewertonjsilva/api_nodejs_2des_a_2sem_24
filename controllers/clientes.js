@@ -1,7 +1,7 @@
 const db = require('../database/connection');
 const moment = require('moment');
 
-function cpfToInt (cpf) {
+function cpfToInt(cpf) {
     const cpfSemMascara = cpf.replace(/\D/g, '');
     const cpfInteiro = parseInt(cpfSemMascara);
     return cpfInteiro;
@@ -50,16 +50,14 @@ module.exports = {
 
             const { usu_nome, usu_email, usu_senha, usu_dt_nasc, usu_cpf, end_logradouro, end_num, end_bairro, end_complemento, cid_id, cli_cel } = request.body;
 
-            const cpf = cpfToInt(usu_cpf); 
+            const cpf = cpfToInt(usu_cpf);
             // Remove a máscara antes de enviar para a API
             const telefoneSemMascara = cli_cel.replace(/\D/g, '');
-            
+
             // converter data nascimento
             // Data no formato brasileiro
             // const dataBrasileira = usu_dt_nasc;
 
-            // Converte para o formato americano (aaaa-mm-dd)
-            // const dataMySql = moment(dataBrasileira, 'DD/MM/YYYY').format('YYYY-MM-DD');         
 
             const usu_tipo = 2;
             const usu_ativo = 1;
