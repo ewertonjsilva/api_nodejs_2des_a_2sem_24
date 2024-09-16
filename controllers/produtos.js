@@ -54,10 +54,11 @@ module.exports = {
         const { page = 1, limit = 5 } = request.query; 
         const inicio = (page -1) * limit;
 
-        const { prd_nome, ptp_id, prd_valor } = request.body;
+        const { prd_id, prd_nome, ptp_id, prd_valor } = request.body;
         const prd_disponivel = 1;
         const prdPesqNm = prd_nome ? `%${prd_nome}%` : `%%`;
-        const prdPesqTp = ptp_id ? `%${ptp_id}%` : `%%`;
+        const prdPesqTp = ptp_id ? `%${ptp_id}%` : `%%`; 
+        const prdIdPesq = prd_id ? prd_id : `%%`;
 
         try {
             const sqlMaxVlr = 'SELECT MAX(prd_valor) vlr_max FROM produtos;';
@@ -86,11 +87,11 @@ module.exports = {
             prd.prd_img, prd.prd_descricao 
             FROM produtos prd 
             INNER JOIN produto_tipos pdt ON pdt.ptp_id = prd.ptp_id 
-            WHERE prd.prd_disponivel = ? AND prd.prd_nome LIKE ? AND prd.ptp_id LIKE ? 
+            WHERE prd.prd_disponivel = ? AND prd.prd_nome LIKE ? AND prd.ptp_id LIKE ?  AND prd.prd_id LIKE ?
             AND prd.prd_valor < ?
             LIMIT ?, ?;`;
 
-            const values = [prd_disponivel, prdPesqNm, prdPesqTp, prdPesqVlr, parseInt(inicio), parseInt(limit)];
+            const values = [prd_disponivel, prdPesqNm, prdPesqTp, prdIdPesq, prdPesqVlr, parseInt(inicio), parseInt(limit)];
 
             const produtos = await db.query(sql, values);
 
