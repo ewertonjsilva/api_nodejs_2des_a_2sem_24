@@ -24,7 +24,7 @@ router.delete('/usuarios/:usu_id', UsuariosController.apagarUsuarios); // params
 router.delete('/usuarios/del/:usu_id', UsuariosController.ocultarUsuario); // params (URL) 
 router.post('/usuarios/login', UsuariosController.login); //body
 
-router.get('/produtos', ProdutosController.listarProdutos); 
+router.post('/listaprodutos', ProdutosController.listarProdutos); 
 router.get('/produtos/home', ProdutosController.listarProdutosHome); 
 router.get('/produtos/promocoes', ProdutosController.listarPromocoes); 
 router.post('/produtos', upload.single('img'), ProdutosController.cadastrarProdutos); 
