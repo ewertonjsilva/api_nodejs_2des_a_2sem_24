@@ -23,21 +23,23 @@ module.exports = {
     async listarUsuarios(request, response) {
         try {
 
-            const { usu_id, usu_nome, usu_cpf, usu_email } = request.body;
+            const { usu_id, usu_nome, usu_cpf, usu_email, usu_tipo } = request.body;
 
             const pesq_usu_id = usu_id ? usu_id : `%%`;
             const pesq_usu_nome = usu_nome ? `%${usu_nome}%` : `%%`;
             const pesq_usu_cpf = usu_cpf ? `%${cpfToInt(usu_cpf)}%` : `%%`;
             const pesq_usu_email = usu_email ? `%${usu_email}%` : `%%`;
-            const usu_ativo = usu_nome ? '' : usu_cpf ? '' : usu_email ? '' : ` AND usu_ativo = 1`;
-            const values = [pesq_usu_id, pesq_usu_nome, pesq_usu_email, pesq_usu_cpf, usu_ativo];
+            // const usu_ativo = usu_nome ? '' : usu_cpf ? '' : usu_email ? '' : ` AND usu_ativo = 1`;
+            const pesqUsuTipo = usu_tipo ? usu_tipo : `%%`;
+
+            const values = [pesq_usu_id, pesq_usu_nome, pesq_usu_email, pesq_usu_cpf, pesqUsuTipo];
 
             // instruções SQL
             const sql = `SELECT 
                 usu_id, usu_nome, usu_email, usu_dt_nasc, usu_senha, 
                 usu_tipo, usu_cpf, usu_ativo = 1 AS usu_ativo  
                 FROM usuarios 
-                WHERE usu_id like ? AND usu_nome like ? AND usu_email like ? AND usu_cpf like ?;`;
+                WHERE usu_id like ? AND usu_nome like ? AND usu_email like ? AND usu_cpf like ? AND usu_tipo like ?;`;
 
             // executa instruções SQL e armazena o resultado na variável usuários
             const usuarios = await db.query(sql, values);
