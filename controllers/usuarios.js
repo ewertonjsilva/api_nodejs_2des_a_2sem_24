@@ -14,7 +14,7 @@ const intToCpfFormat = (cpfInt) => {
 };
 
 const dataInput = (data) => {
-    // Converte para o formato americano (aaaa-mm-dd)
+    // Converte para o formato americano (aaaa-mm-dd)    
     const dataInput = moment(data, 'YYYY/MM/DD').format('YYYY-MM-DD'); 
     return dataInput;
 }
