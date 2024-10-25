@@ -119,3 +119,10 @@ LEFT JOIN (
 LEFT JOIN cidades cid ON cid.cid_id = edcl_principal.cid_id 
 WHERE us.usu_ativo = 1 
 AND cl.cli_cel = '18912345678'; -- 11988885678 18912345678
+
+
+
+INSERT INTO produto_tipos 
+    (ptp_nome, ptp_icone) 
+VALUES 
+    (?, ?); 
