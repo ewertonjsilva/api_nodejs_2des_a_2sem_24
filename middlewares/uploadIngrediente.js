@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
         //let data = Date.now().toString();
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9); 
         // identificar extensão
-        const ext = file.mimetype === 'image/jpeg' ? '.jpeg' : file.mimetype.slice(file.mimetype.length - 3);
+        const ext = file.mimetype === 'image/jpeg' ? 'jpeg' : file.mimetype.slice(file.mimetype.length - 3);
         cb(null, file.fieldname + '-' + uniqueSuffix + '.' + ext);
         //cb(null, data + '_' + file.originalname);
     }
