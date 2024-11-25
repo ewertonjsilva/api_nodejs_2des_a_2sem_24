@@ -1,4 +1,5 @@
 const db = require('../database/connection'); 
+var fse = require('fs-extra');
 
 module.exports = {
     async listarIngredientes(request, response) {
@@ -73,5 +74,18 @@ module.exports = {
             });
         }
     }, 
+    async uploadImagem(request, response) {
+        try {
+            const img = request.file.filename; 
+            return response.status(200).json(
+                {
+                    sucesso: true, 
+                    dados: img
+                }
+            )
+        } catch (error) {
+            
+        }
+    }
 }
 
