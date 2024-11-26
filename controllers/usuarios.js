@@ -1,4 +1,4 @@
-const db = require('../database/connection'); 
+const db = require('../database/connection');
 const moment = require('moment');
 
 function cpfToInt(cpf) {
@@ -15,7 +15,7 @@ const intToCpfFormat = (cpfInt) => {
 
 const dataInput = (data) => {
     // Converte para o formato americano (aaaa-mm-dd)    
-    const dataInput = moment(data, 'YYYY/MM/DD').format('YYYY-MM-DD'); 
+    const dataInput = moment(data, 'YYYY/MM/DD').format('YYYY-MM-DD');
     return dataInput;
 }
 
@@ -42,14 +42,14 @@ module.exports = {
                 WHERE usu_id like ? AND usu_nome like ? AND usu_email like ? AND usu_cpf like ? AND usu_tipo like ?;`;
 
             // executa instruções SQL e armazena o resultado na variável usuários
-            const usuarios = await db.query(sql, values);
+            const [rows] = await db.query(sql, values);
             // armazena em uma variável o número de registros retornados
-            const nItens = usuarios[0].length;
+            const nItens = rows.length;
 
             // Itera sobre os usuários e formata o CPF
-            const usuariosFormatados = usuarios[0].map(usuario => ({
+            const usuariosFormatados = rows.map(usuario => ({
                 ...usuario,
-                usu_cpf: intToCpfFormat(usuario.usu_cpf), 
+                usu_cpf: intToCpfFormat(usuario.usu_cpf),
                 usu_dt_nasc: dataInput(usuario.usu_dt_nasc)
             }));
 
@@ -81,9 +81,9 @@ module.exports = {
             // definição dos dados a serem inseridos em um array
             const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, cpf];
             // execução da instrução sql passando os parâmetros
-            const execSql = await db.query(sql, values);
+            const [result] = await db.query(sql, values);
             // identificação do ID do registro inserido
-            const usu_id = execSql[0].insertId;
+            const usu_id = result.insertId;
 
             return response.status(200).json({
                 sucesso: true,
@@ -112,12 +112,20 @@ module.exports = {
             // preparo do array com dados que serão atualizados
             const values = [usu_nome, usu_email, usu_dt_nasc, usu_senha, usu_tipo, usu_ativo, usu_id];
             // execução e obtenção de confirmação da atualização realizada
-            const atualizaDados = await db.query(sql, values);
+            const [result] = await db.query(sql, values);
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    sucesso: false,
+                    mensagem: `Usuário ${usu_id} não encontrado!`,
+                    dados: result.affectedRows                    
+                });
+            }
 
             return response.status(200).json({
                 sucesso: true,
                 mensagem: `Usuário ${usu_id} atualizado com sucesso!`,
-                dados: atualizaDados[0].affectedRows
+                dados: result.affectedRows
                 // mensSql: atualizaDados
             });
         } catch (error) {
@@ -137,12 +145,20 @@ module.exports = {
             // array com parâmetros da exclusão
             const values = [usu_id];
             // executa instrução no banco de dados
-            const excluir = await db.query(sql, values);
+            const [result] = await db.query(sql, values); 
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    sucesso: false,
+                    mensagem: `Usuário ${usu_id} não encontrado!`,
+                    dados: result.affectedRows                    
+                });
+            }
 
             return response.status(200).json({
                 sucesso: true,
                 mensagem: `Usuário ${usu_id} excluído com sucesso`,
-                dados: excluir[0].affectedRows
+                dados: result.affectedRows
             });
         } catch (error) {
             return response.status(500).json({
@@ -207,7 +223,7 @@ module.exports = {
                 dados: error.message
             });
         }
-    }, 
+    },
     async atualizaSenha(request, response) {
         try {
             // parâmetros recebidos pelo corpo da requisição
